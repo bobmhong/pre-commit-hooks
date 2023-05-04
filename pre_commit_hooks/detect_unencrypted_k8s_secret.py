@@ -66,14 +66,16 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(exc)
             retval = 1
 
-        try:
+        if 'kind' in parsed_yaml and 'apiVersion' in parsed_yaml:
+            # looks like a Kubernetes resource
+
             if parsed_yaml['kind'] == 'Secret':
-                # Look for a top level key named sops to indicate the
-                # file has been encrypted
-                parsed_yaml['sops']
-        except KeyError as exc:
-            print(exc, 'Kubernetes secret is not encrypted with SOPS')
-            retval = 1
+                try:
+                    parsed_yaml['sops']
+
+                except KeyError:
+                    print(f'Kubernetes secret {filename} is not SOPS encrypted')  # noqa: E501
+                    retval = 1
 
     return retval
 
