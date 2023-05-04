@@ -95,6 +95,12 @@
     entry: check-yaml
     language: python
     types: [yaml]
+-   id: detect-unencrypted-k8s-secret
+    name: detect unencrypted k8s secret
+    description: ensures yaml files with kind secret have a sops key.
+    entry: detect-unencrypted-k8s-secret
+    language: python
+    types: [yaml]
 -   id: debug-statements
     name: debug statements (python)
     description: checks for debugger imports and py37+ `breakpoint()` calls in python source.
