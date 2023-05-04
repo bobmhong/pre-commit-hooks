@@ -10,6 +10,8 @@ from testing.util import get_resource_path
     ('filename', 'expected_retval'), (
         ('k8ssecret_unencrypted.yaml', 1),
         ('k8ssecret_encrypted.yaml', 0),
+        ('k8smissing_kind.yaml', 0),
+        ('k8sconfigmap.yaml', 0),
     ),
 )
 def test_main(filename, expected_retval):

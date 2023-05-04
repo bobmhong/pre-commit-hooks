@@ -107,6 +107,9 @@ The following arguments are available:
 #### `detect-private-key`
 Checks for the existence of private keys.
 
+#### `detect-unencrypted-k8s-secret`
+Checks for the existence of unencrypted Kubernetes Secrets (without sops key).
+
 #### `double-quote-string-fixer`
 This hook replaces double quoted strings with single quoted strings.
 
