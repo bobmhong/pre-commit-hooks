@@ -1,0 +1,11 @@
+# Used for creating test sops encrypted files
+# e.g.
+
+creation_rules:
+  # Encrypted password values config file
+  - path_regex: .*.yaml
+    encrypted_regex: ^(data|stringData)$
+    shamir_threshold: 1
+    key_groups:
+      - age:
+          - age1v33ulnkrhr5l6wed3qdt4p4lc03x84aqpf7yqa8szvuu2gq9esmsk34nuh
