@@ -61,10 +61,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     for filename in args.filenames:
         try:
             with open(filename, encoding='UTF-8') as f:
-                load_fn(f)
+                parsed_yaml = load_fn(f)
         except ruamel.yaml.YAMLError as exc:
             print(exc)
             retval = 1
+
+        try:
+            if parsed_yaml['kind'] == 'Secret':
+                # Look for a top level key named sops to indicate the
+                # file has been encrypted
+                parsed_yaml['sops']
+        except KeyError as exc:
+            print(exc, 'Kubernetes secret is not encrypted with SOPS')
+            retval = 1
+
     return retval
 
 
